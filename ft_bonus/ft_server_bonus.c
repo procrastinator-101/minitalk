@@ -6,7 +6,7 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 11:45:44 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/09 14:02:02 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,32 @@
 
 void	ft_handle_signal(int signal)
 {
-	static int	bit;
-	static char	byte;
-	static char	*str;
+	static int		bit;
+	static int		eot;
+	static char		byte;
+	static t_text	*text;
 
 	if (signal == SIGUSR1)
 		byte |= (1 << bit);
 	bit++;
-	if (bit == 8)
+	if (bit < 8)
+		return ;
+	if (eot)
 	{
-		str = ft_append_character(str, byte);
-		if (!str)
+		ret = ft_manage_server_eot(byte);
+		if (ret == EOT)
 		{
-			ft_putstr_fd("Memory allocation failure\n", STDERR_FILENO);
-			exit(EXIT_FAILURE);
+			eof = 0;
+			ft_text_del(text);
+			text = 0;
 		}
-		if (!byte)
-		{
-			ft_putendl_fd(str, STDOUT_FILENO);
-			free(str);
-			str = 0;
-		}
-		bit = 0;
-		byte = 0;
 	}
+	else if (!byte)
+		eof = 1;
+	else if (ft_append_character(text, byte))
+		ft_manage_error(EMAF);
+	bit = 0;
+	byte = 0;
 }
 
 int	main(void)

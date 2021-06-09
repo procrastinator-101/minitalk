@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_append_character_bonus.c                        :+:      :+:    :+:   */
+/*   ft_manage_error_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 13:40:53 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/09 13:31:23 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/09 13:40:25 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-int	ft_append_character(t_text *text, char c)
+void	ft_manage_error(int error)
 {
-	size_t	i;
-	char	*buffer;
-
-	if (!text)
-	{
-		text = ft_text_create();
-		if (!text)
-			return (1);
-	}
-	else if (text->size % BUFFER_SIZE == 0)
-	{
-		text = ft_text_expand(text);
-		if (!text)
-			return (1);
-	}
-	text->buffer[text->size - 1] = c;
-	text->buffer[text->size] = 0;
-	text->size++;
-	return (0);
+	ft_display_error_msg(error);
+	exit(EXIT_FAILURE);
 }

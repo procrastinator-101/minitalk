@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_append_character_bonus.c                        :+:      :+:    :+:   */
+/*   ft_text_create_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 13:40:53 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/09 12:47:32 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/09 12:54:59 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-int	ft_append_character(t_text *text, char c)
+t_text	*ft_text_create(void)
 {
-	size_t	i;
-	char	*buffer;
+	t_text	*text;
 
+	text = malloc(sizeof(t_text));
 	if (!text)
+		return (0);
+	text->buffer = malloc(BUFFER_SIZE * sizeof(char));
+	if (!text->buffer)
 	{
-		text = ft_text_create();
-		if (!text)
-			return (1);
+		free(text);
+		return (0);
 	}
-	else if (text->size % BUFFER_SIZE == 0)
-	{
-		text = ft_text_expand(text);
-		if (!text)
-			return (1);
-	}
-	text->buffer[text->size - 1] = c;
-	text->buffer[text->size] = 0;
-	text->size++;
-	return (0);
+	text->buffer[0] = 0;
+	text->size = 1;
+	return (text);
 }
