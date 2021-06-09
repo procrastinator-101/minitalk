@@ -6,7 +6,7 @@
 #    By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/09 09:32:37 by yarroubi          #+#    #+#              #
-#    Updated: 2021/06/09 11:59:48 by yarroubi         ###   ########.fr        #
+#    Updated: 2021/06/09 17:10:15 by yarroubi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,31 @@ SERVER_MANDATORY_SRC = $(MANDATORY_PATH)/ft_append_character.c \
 					   $(MANDATORY_PATH)/ft_server.c \
 					   $(MANDATORY_PATH)/ft_strlen.c
 
-CLIENT_BONUS_SRC = $(BONUS_PATH)/ft_atoi_check_bonus.c \
-				   $(BONUS_PATH)/ft_client_bonus.c \
-				   $(BONUS_PATH)/ft_putstr_fd_bonus.c \
-				   $(BONUS_PATH)/ft_transmit_string_bonus.c
+CLIENT_BONUS_SRC = $(CLIENT_BONUS_SRC)/ft_adler32_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_atoi_check_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_client_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_display_error_msg_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_manage_client_eot.c \
+				   $(CLIENT_BONUS_SRC)/ft_manage_error_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_putendl_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_putnendl_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_putstr_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_send_byte.c \
+				   $(CLIENT_BONUS_SRC)/ft_strlen_bonus.c
 
-SERVER_BONUS_SRC = $(BONUS_PATH)/ft_append_character_bonus.c \
-				   $(BONUS_PATH)/ft_putendl_fd_bonus.c \
-				   $(BONUS_PATH)/ft_putstr_fd_bonus.c \
-				   $(BONUS_PATH)/ft_server_bonus.c \
-				   $(BONUS_PATH)/ft_strlen_bonus.c
+SERVER_BONUS_SRC = $(CLIENT_BONUS_SRC)/ft_adler32_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_append_character_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_display_error_msg_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_manage_error_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_manage_server_eot.c \
+				   $(CLIENT_BONUS_SRC)/ft_putendl_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_putnendl_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_putstr_fd_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_send_byte.c \
+				   $(CLIENT_BONUS_SRC)/ft_server_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_text_create_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_text_expand_bonus.c \
+				   $(CLIENT_BONUS_SRC)/ft_text_harddel_bonus.c
 
 
 ifndef BONUS

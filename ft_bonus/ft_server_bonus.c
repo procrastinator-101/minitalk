@@ -6,7 +6,7 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 14:02:02 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/09 16:21:34 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,7 @@ void	ft_handle_signal(int signal)
 	if (bit < 8)
 		return ;
 	if (eot)
-	{
-		ret = ft_manage_server_eot(byte);
-		if (ret == EOT)
-		{
-			eof = 0;
-			ft_text_del(text);
-			text = 0;
-		}
-	}
+		eof = ft_manage_server_eot(&text, &eot, byte);
 	else if (!byte)
 		eof = 1;
 	else if (ft_append_character(text, byte))

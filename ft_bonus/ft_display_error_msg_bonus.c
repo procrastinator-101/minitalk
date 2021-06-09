@@ -6,7 +6,7 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:39:17 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 13:40:07 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/09 16:58:13 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	ft_display_error_msg(int error)
 	if (error == EMAF)
 		ft_putstr_fd("Memory allocation failure\n", STDERR_FILENO);
 	else if (error == ECD)
-		ft_putstr_fd("Data was corrupted during transmission\n", STDERR_FILENO);
+		ft_putstr_fd("Corrupted data during transmission\n", STDERR_FILENO);
 	else if (error == ETC)
 		ft_putstr_fd("Truncated characters\n" STDERR_FILENO);
 	else if (error == EMA)
 		ft_putstr_fd("Missing argument(s)\n", STDERR_FILENO);
 	else if (error == EIP)
 		ft_putstr_fd("Incorrect pid\n", STDERR_FILENO);
+	else if (error == ESTF)
+		ft_putstr_fd("Signal transmission failure\n", STDERR_FILENO);
 }

@@ -6,13 +6,13 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 12:17:28 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 12:20:53 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/09 17:08:01 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-uint32_t	ft_adler32_bonus(char *buffer, size_t len)
+uint32_t	ft_adler32(char *buffer, size_t len)
 {
 	size_t		i;
 	uint16_t	left;
