@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_append_character.c                              :+:      :+:    :+:   */
+/*   ft_text_append_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 15:03:39 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 10:25:32 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 13:05:33 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 15:15:27 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-char	*ft_append_character(char *str, char c)
+t_text	*ft_text_append_char(t_text *text, char c)
 {
-	int		i;
-	int		size;
-	char	*ptr;
-
-	if (!str)
-		size = 0;
-	else
-		size = ft_strlen(str);
-	ptr = malloc(size + 2);
-	if (!ptr)
-		free(str);
-	if (!ptr)
-		return (0);
-	i = -1;
-	while (++i < size)
-		ptr[i] = str[i];
-	ptr[i] = c;
-	ptr[i + 1] = 0;
-	free(str);
-	return (ptr);
+	if (!text)
+	{
+		text = ft_text_create();
+		if (!text)
+			return (0);
+	}
+	else if (text->size == text->end + 1)
+	{
+		text = ft_text_expand(text);
+		if (!text)
+			return (0);
+	}
+	text->buffer[text->end++] = c;
+	text->buffer[text->end] = 0;
+	return (text);
 }

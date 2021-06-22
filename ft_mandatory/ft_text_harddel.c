@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_text_harddel.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 21:54:11 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 10:32:12 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 13:03:52 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 13:04:12 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_text_harddel(t_text **text)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!*text)
+		return ;
+	free((*text)->buffer);
+	free(*text);
+	*text = 0;
 }

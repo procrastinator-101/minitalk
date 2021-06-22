@@ -6,7 +6,7 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 15:25:54 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 11:11:06 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/13 15:37:31 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,20 @@
 
 int	main(int argc, char **argv)
 {
+	int	i;
 	int	pid;
 	int	error;
 
 	if (argc > 3)
-	{
-		ft_putstr_fd("Truncated characters\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+		ft_manage_error(ETC);
 	else if (argc < 3)
-	{
-		ft_putstr_fd("Not enough arguments\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+		ft_manage_error(EMA);
 	pid = ft_atoi_check(argv[1], &error);
 	if (pid < 0 || error)
-	{
-		ft_putstr_fd("Incorrect pid\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
-	ft_transmit_string(pid, argv[2]);
+		ft_manage_error(EIP);
+	i = -1;
+	while (argv[2][++i])
+		ft_send_byte(pid, argv[2][i]);
+	ft_send_byte(pid, 0);
 	return (0);
 }

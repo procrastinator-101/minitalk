@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_send_byte.c                                     :+:      :+:    :+:   */
+/*   ft_text_append_char_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 16:30:48 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 16:59:13 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/22 15:25:59 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/22 15:25:59 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-void	ft_send_byte(int pid, char byte)
+t_text	*ft_text_append_char(t_text *text, char c)
 {
-	int	i;
-	int	ret;
-
-	i = -1;
-	while (++i < 8)
+	if (!text)
 	{
-		if (byte & (1 << i))
-			ret = kill(pid, SIGUSR1);
-		else
-			ret = kill(pid, SIGUSR2);
-		if (ret)
-			ft_manage_error(ESTF);
-		usleep(SLEEP_TIME);
+		text = ft_text_create();
+		if (!text)
+			return (0);
 	}
+	else if (text->size == text->end + 1)
+	{
+		text = ft_text_expand(text);
+		if (!text)
+			return (0);
+	}
+	text->buffer[text->end++] = c;
+	text->buffer[text->end] = 0;
+	return (text);
 }

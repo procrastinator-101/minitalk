@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_bonus.c                              :+:      :+:    :+:   */
+/*   ft_text_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 11:45:44 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 12:41:52 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 14:44:05 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk_bonus.h"
+#include "ft_minitalk.h"
 
-void	ft_putendl_fd(char *str, int fd)
+t_text	*ft_text_expand(t_text *text)
 {
-	size_t	len;
+	char	*buffer;
 
-	len = 0;
-	while (str[len])
-		len++;
-	write(fd, str, len);
-	write(fd, "\n", 1);
+	buffer = malloc((text->size * 2) * sizeof(char));
+	if (!buffer)
+	{
+		free(text->buffer);
+		free(text);
+		return (0);
+	}
+	text->size *= 2;
+	buffer[text->end] = 0;
+	ft_memcpy(buffer, text->buffer, text->end);
+	free(text->buffer);
+	text->buffer = buffer;
+	return (text);
 }

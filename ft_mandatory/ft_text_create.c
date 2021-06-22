@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_text_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 11:45:44 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 11:45:44 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 12:40:26 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 14:02:06 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk_bonus.h"
+#include "ft_minitalk.h"
 
-size_t	ft_strlen(const char *s)
+t_text	*ft_text_create(void)
 {
-	size_t	i;
+	t_text	*text;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	text = malloc(sizeof(t_text));
+	if (!text)
+		return (0);
+	text->buffer = malloc(BUFFER_SIZE * sizeof(char));
+	if (!text->buffer)
+	{
+		free(text);
+		return (0);
+	}
+	text->end = 0;
+	text->buffer[0] = 0;
+	text->size = BUFFER_SIZE;
+	return (text);
 }

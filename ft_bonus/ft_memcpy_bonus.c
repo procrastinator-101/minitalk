@@ -1,50 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_memcpy_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:25:58 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/22 16:28:20 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:25:58 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-void	ft_handle_signal(int signal)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
-	static int		bit;
-	static int		eot;
-	static char		byte;
-	static t_text	*text;
+	char				*b_ptr;
+	char				*b_ptr2;
+	unsigned long long	*qw_ptr;
+	unsigned long long	*qw_ptr2;
 
-	if (signal == SIGUSR1)
-		byte |= (1 << bit);
-	bit++;
-	if (bit == 8)
+	qw_ptr = (unsigned long long *)dst;
+	qw_ptr2 = (unsigned long long *)src;
+	while (n >= sizeof(unsigned long long))
 	{
-		if (eot)
-			eot = ft_manage_server_eot(byte, &text);
-		else if (!byte)
-			eot = 1;
-		else
-		{
-			text = ft_text_append_char(text, byte);
-			if (!text)
-				ft_manage_error(EMAF);
-		}
-		bit = 0;
-		byte = 0;
+		*qw_ptr = *qw_ptr2;
+		qw_ptr++;
+		qw_ptr2++;
+		n -= sizeof(unsigned long long);
 	}
-}
-
-int	main(void)
-{
-	printf("PID : %d\n", getpid());
-	signal(SIGUSR1, ft_handle_signal);
-	signal(SIGUSR2, ft_handle_signal);
-	while (1)
-		;
-	return (0);
+	b_ptr = (char *)qw_ptr;
+	b_ptr2 = (char *)qw_ptr2;
+	while (n--)
+	{
+		*b_ptr = *b_ptr2;
+		b_ptr++;
+		b_ptr2++;
+	}
+	return (dst);
 }

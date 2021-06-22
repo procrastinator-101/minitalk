@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnendl_fd_bonus.c                             :+:      :+:    :+:   */
+/*   ft_manage_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 17:03:20 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 17:03:42 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 10:25:59 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 10:26:01 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk_bonus.h"
+#include "ft_minitalk.h"
 
-void	ft_putnendl_fd(char *str, size_t n, int fd)
+void	ft_manage_error(int error)
 {
-	write(fd, str, n);
-	write(fd, "\n", 1);
+	ft_display_error_msg(error);
+	exit(EXIT_FAILURE);
 }

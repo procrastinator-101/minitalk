@@ -6,34 +6,38 @@
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 15:13:18 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 11:41:57 by yarroubi         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:11:09 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
+void	ft_manage_server_eot(t_text **text)
+{
+	if (*text)
+		write(STDOUT_FILENO, (*text)->buffer, (*text)->end);
+	write(STDOUT_FILENO, "\n", 1);
+	ft_text_harddel(text);
+}
+
 void	ft_handle_signal(int signal)
 {
-	static int	bit;
-	static char	byte;
-	static char	*str;
+	static int		bit;
+	static char		byte;
+	static t_text	*text;
 
 	if (signal == SIGUSR1)
 		byte |= (1 << bit);
 	bit++;
 	if (bit == 8)
 	{
-		str = ft_append_character(str, byte);
-		if (!str)
-		{
-			ft_putstr_fd("Memory allocation failure\n", STDERR_FILENO);
-			exit(EXIT_FAILURE);
-		}
 		if (!byte)
+			ft_manage_server_eot(&text);
+		else
 		{
-			ft_putendl_fd(str, STDOUT_FILENO);
-			free(str);
-			str = 0;
+			text = ft_text_append_char(text, byte);
+			if (!text)
+				ft_manage_error(EMAF);
 		}
 		bit = 0;
 		byte = 0;

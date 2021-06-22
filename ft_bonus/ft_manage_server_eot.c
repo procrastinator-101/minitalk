@@ -5,37 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 12:21:08 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/09 17:03:48 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/22 15:34:50 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/22 15:44:11 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk_bonus.h"
 
-int	ft_manage_server_eot(t_text **text, char byte)
+int	ft_manage_server_eot(char byte, t_text **text)
 {
-	int				error;
-	static int		shift;
-	static uint32_t	adler32;
+	static int	pid;
+	static int	shift;
 
-	alder32 = (adler32 << 8) | byte;
+	pid = (pid << 8) | (unsigned char)byte;
 	shift++;
 	if (shift < 4)
 		return (1);
+	printf("the message from the client with pid : %d ", pid);
+	printf("has been received\n");
+	kill(pid, SIGUSR1);
 	if (*text)
-		tmp = ft_adler32((*text)->buffer, (*text)->size - 1);
-	else
-		tmp = 0;
-	error = 0;
-	if (tmp != adler32)
-		error = ECD;
-	shift = 0;
-	adler32 = 0;
-	ft_putnendl_fd(text->buffer, text->size, STDOUT_FILENO);
-	if (error)
-		ft_display_error_msg(error);
-	else
-		ft_putendl_fd("Message received succesfully\n", STDOUT_FILENO);
+		write(STDOUT_FILENO, (*text)->buffer, (*text)->end);
+	write(STDOUT_FILENO, "\n", 1);
 	ft_text_harddel(text);
 	return (0);
 }

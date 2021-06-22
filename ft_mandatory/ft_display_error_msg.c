@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_display_error_msg_bonus.c                       :+:      :+:    :+:   */
+/*   ft_display_error_msg.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarroubi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 15:25:57 by yarroubi          #+#    #+#             */
-/*   Updated: 2021/06/22 15:49:54 by yarroubi         ###   ########.fr       */
+/*   Created: 2021/06/10 10:26:14 by yarroubi          #+#    #+#             */
+/*   Updated: 2021/06/10 10:26:19 by yarroubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk_bonus.h"
+#include "ft_minitalk.h"
 
 void	ft_display_error_msg(int error)
 {
@@ -27,6 +27,4 @@ void	ft_display_error_msg(int error)
 		ft_putstr_fd("Incorrect pid\n", STDERR_FILENO);
 	else if (error == ESTF)
 		ft_putstr_fd("Signal transmission failure\n", STDERR_FILENO);
-	else if (error == EMTF)
-		ft_putstr_fd("Message transmission failure\n", STDERR_FILENO);
 }
